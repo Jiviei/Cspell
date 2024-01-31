@@ -1,19 +1,21 @@
 {
-  "name": "spellchecker_",
+  "name": "cspell_",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "node --loader ts-node/esm ./index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "cspell": "^8.3.2"
-  },
   "devDependencies": {
     "@types/node": "^20.11.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@cspell/dict-ru_ru": "^2.2.0",
+    "cspell-lib": "^8.3.2"
   }
 }

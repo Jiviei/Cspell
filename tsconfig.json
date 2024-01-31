@@ -1,5 +1,52 @@
 {
-    "compilerOptions": {
-        "moduleResolution": "node"
-    }
+	"compilerOptions": {
+		"baseUrl": "./",
+		"rootDir": "./",
+		"declaration": true,
+		"declarationMap": true,
+
+		"target": "esnext",
+		"noEmit": true,
+		"lib": ["dom", "dom.iterable", "esnext"],
+
+		"strict": false,
+		"downlevelIteration": true,
+		"alwaysStrict": true,
+		"incremental": true,
+
+		"noImplicitOverride": false,
+		"noImplicitThis": true,
+
+		"noPropertyAccessFromIndexSignature": false,
+		"strictFunctionTypes": false,
+		"strictNullChecks": false,
+
+		"skipLibCheck": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+
+		"importHelpers": true,
+		"importsNotUsedAsValues": "remove",
+
+		"removeComments": true,
+		"forceConsistentCasingInFileNames": true,
+		"preserveSymlinks": true,
+
+		"jsx": "preserve",
+		"allowJs": true,
+		"checkJs": true
+	},
+
+	"include": [
+		"./**/*"
+	],
+
+	"exclude": [
+		"./**/node_modules",
+		"./**/dist/*",
+	]
 }

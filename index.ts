@@ -1,31 +1,29 @@
-import { validateText, combineTextAndLanguageSettings, finalizeSettings, getDefaultSettings } from 'cspell-lib';
+import { getDefaultSettings, mergeSettings, readSettings, suggestionsForWord, validateText} from 'cspell-lib';
 
 const customWords = ['wordz', 'cuztom', 'clockz'];
 
+
 export const SpellcheckerFactory = async (customWords: string[] = []) => {
-    const settings = {
-        ...getDefaultSettings(),
-        enabledLanguageIds: [],
-        words: customWords,
+    return async (text: string) => {
+        const settings = mergeSettings(await getDefaultSettings(false), await readSettings("@cspell\\dict-ru_ru\\cspell-ext.json"), await readSettings("@cspell\\dict-en-gb\\cspell-ext.json"))
+        return await validateText(text, {...settings, dictionaries: ["ru-ru", "en-gb"], words: ["coztom"]}, {
+            generateSuggestions: true,
+        });
     };
-
-    const fileSettings = combineTextAndLanguageSettings(settings, '', ['plaintext']);
-    const finalSettings = finalizeSettings(fileSettings);
-
-    return async (phrase: string) => {
-        return await validateText(phrase, finalSettings, { generateSuggestions: true });
+    return async (text: string) => {
+        const settings = mergeSettings(await getDefaultSettings(false), await readSettings("@cspell\\dict-ru_ru\\cspell-ext.json"))
+        return await suggestionsForWord(text, {
+            dictionaries: ["ru-ru"],
+        }, settings);
     };
 };
 
-export const checkSpelling = async (phrase: string) => {
+export const checkSpelling = async (text: string) => {
     const spellChecker = await SpellcheckerFactory(customWords);
-
-    return spellChecker(phrase);
+    return spellChecker(text);
 };
-
 async function run() {
-    const r = await checkSpelling('These are my coztom wordz.');
-    console.log('%o', r);
+    console.log('%o', await checkSpelling('привет праграмист world These are my coztom'));
 }
 
 run();
